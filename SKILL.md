@@ -32,6 +32,25 @@ description: 求职全流程助手，支持 JD 抓取、简历匹配、简历优
 提醒用户脱敏：电话、身份证、住址、客户机密和未公开数据。
 
 若缺少 JD，只能做基础诊断并明确说明不能完成岗位匹配评分。若缺少简历，只能解析 JD 并生成素材采集问题。
+## 输入自动识别规则
+
+当用户发送以下内容时，自动执行对应操作，无需用户额外说明：
+
+| 用户输入 | Agent 行为 |
+|---------|-----------|
+| JD 链接（如 `https://*.feishu.cn/jobs/...`） | 使用 browser 工具打开并抓取 JD 内容 |
+| 招聘平台 URL | 同上，识别域名后使用对应选择器 |
+| PDF 文件路径（如 `/path/to/xxx.pdf`） | 使用 PDF 解析工具提取文本内容 |
+| `.pdf` 文件附件 | 同上 |
+
+### URL 识别模式
+- 以 `http://` 或 `https://` 开头
+- 包含招聘平台域名：feishu、lagou、zhipin、boss、linkedin、indeed、glassdoor 等
+
+### 文件识别模式
+- 文件扩展名为 `.pdf`
+- 如 PDF 解析失败，提示用户提供文本版本或截图
+
 
 ## 阶段响应契约
 
@@ -259,6 +278,7 @@ pending → viewed → interview → offer
 
 ### 工具文档
 - `tools/browser_automation.md` - 浏览器自动化
+- `tools/pdf_parser.md` - PDF 文件解析
 - `tools/api_services.md` - API 配置
 - `docs/platform_guide.md` - 平台使用指南
 - `docs/storage_format.md` - 存储格式
