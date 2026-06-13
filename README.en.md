@@ -1,6 +1,6 @@
 # GetJobs Skill
 
-> Full-Stack Job Search Assistant - JD Crawling, Resume Matching, Application Tracking, Resume Integration
+> Full-Stack Job Search Assistant - JD Crawling, Resume Matching, Application Tracking, Cover Letter Generation
 
 A comprehensive AI Skill for managing your entire job search process in one place.
 
@@ -26,10 +26,10 @@ A comprehensive AI Skill for managing your entire job search process in one plac
 - Follow-up reminders
 - Weekly/Monthly reports
 
-### 4. Resume Integration
-- Generate tailored resume via `resume-jd-optimizer-cn`
-- Generate cover letters
-- Link to tracking records
+### 4. Cover Letter Generation
+- Generate tailored cover letters based on resume
+- Support multiple formats (standard/brief/Boss直聘)
+- Auto-link to tracking records
 
 ---
 
@@ -37,8 +37,8 @@ A comprehensive AI Skill for managing your entire job search process in one plac
 
 ```bash
 # Install
-git clone https://github.com/your-repo/getjobs-skill.git \
-  ~/.codex/skills/getjobs-skill
+git clone https://github.com/Cap-bit-mint/GetJobs.git \
+  ~/.codex/skills/getjobs
 ```
 
 ```markdown
@@ -50,6 +50,9 @@ Analyze my resume against this JD.
 
 # Track applications
 Add an application: ByteDance, Senior PM, 85 match score.
+
+# Generate cover letter
+Generate a cover letter for this JD.
 ```
 
 ---
@@ -70,7 +73,7 @@ All data stored locally for privacy:
 ├── applications.json    # Application records
 ├── config.json         # Configuration
 ├── cache/jds/          # JD cache
-└── output/            # Generated resumes/letters
+└── output/            # Generated cover letters
 ```
 
 ---

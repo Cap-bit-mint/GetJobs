@@ -1,6 +1,6 @@
 # GetJobs Skill
 
-> 求职全流程助手 - JD 抓取、简历匹配、投递追踪、简历联动
+> 求职全流程助手 - JD 抓取、简历匹配、投递追踪、求职信生成
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Skill](https://img.shields.io/badge/AI%20Skill-GetJobs-6f42c1)](SKILL.md)
@@ -16,7 +16,7 @@
 | JD 信息分散在多个平台 | 一站式搜索和抓取 |
 | 不知道 JD 与简历的匹配度 | 量化匹配分析 |
 | 投递后忘记跟进 | 投递状态追踪 |
-| 每个 JD 都要手动优化简历 | 与简历 Skill 联动生成定制简历 |
+| 每个 JD 都要写求职信 | 基于简历生成定制求职信 |
 
 ---
 
@@ -43,11 +43,11 @@
 - 跟进提醒
 - 周报/月报统计
 
-### 4. 简历联动
+### 4. 求职信生成
 
-- 调用 `resume-jd-optimizer-cn` 生成定制简历
-- 生成配套求职信
-- 追踪记录关联
+- 基于简历生成定制求职信
+- 支持多种格式（标准/精简/Boss直聘）
+- 自动关联投递记录
 
 ---
 
@@ -82,9 +82,9 @@ JD：[粘贴 JD]
 匹配分：85
 ```
 
-**生成定制简历：**
+**生成求职信：**
 ```
-为这个 JD 生成定制简历和求职信。
+为这个 JD 生成一封求职信。
 ```
 
 ---
@@ -98,7 +98,7 @@ getjobs-skill/
 │   ├── job_search.md           # JD 搜索与抓取
 │   ├── matcher.md              # JD-简历匹配
 │   ├── tracker.md             # 投递追踪
-│   └── cover_letter.md         # 求职信生成
+│   └── cover_letter.md        # 求职信生成
 ├── rubrics/
 │   └── match_score.md         # 匹配度评分规则
 ├── templates/
@@ -146,26 +146,10 @@ getjobs-skill/
 ├── applications.json      # 投递记录
 ├── config.json           # 配置文件
 ├── cache/jds/          # JD 缓存
-└── output/              # 生成的简历/求职信
+└── output/              # 生成的求职信
 ```
 
 详见 [隐私政策](docs/privacy.md)。
-
----
-
-## 与 resume-jd-optimizer-cn 联动
-
-GetJobs 专注于职位管理和 JD 分析，在需要生成定制简历时，可调用 `resume-jd-optimizer-cn`：
-
-```markdown
-我想投递这个岗位，请调用简历优化 Skill。
-```
-
-联动流程：
-1. 用户选择目标 JD
-2. 调用简历 Skill 生成定制简历
-3. 可选生成求职信
-4. 更新投递追踪记录
 
 ---
 

@@ -1,6 +1,6 @@
 # 安装与接入指南
 
-`getjobs-skill` 是一个用于求职全流程管理的 AI Skill，支持 JD 抓取、简历匹配、投递追踪和简历联动。
+`getjobs-skill` 是一个用于求职全流程管理的 AI Skill，支持 JD 抓取、简历匹配、投递追踪和求职信生成。
 
 ## 先理解文件作用
 
@@ -18,14 +18,14 @@
 ### 方式一：Git 克隆
 
 ```bash
-git clone https://github.com/your-repo/getjobs-skill.git
-cd getjobs-skill
+git clone https://github.com/Cap-bit-mint/GetJobs.git
+cd GetJobs
 ```
 
 ### 方式二：下载 ZIP
 
 1. 下载最新 Release
-2. 解压到 `~/.getjobs/` 目录
+2. 解压到 `~/.codex/skills/getjobs/` 目录
 
 ## 安装到 Codex
 
@@ -33,8 +33,8 @@ cd getjobs-skill
 
 ```bash
 mkdir -p ~/.codex/skills
-git clone https://github.com/your-repo/getjobs-skill.git \
-  ~/.codex/skills/getjobs-skill
+git clone https://github.com/Cap-bit-mint/GetJobs.git \
+  ~/.codex/skills/getjobs
 ```
 
 ### 验证安装
@@ -42,7 +42,7 @@ git clone https://github.com/your-repo/getjobs-skill.git \
 在新会话中输入：
 
 ```
-使用 $getjobs-skill。
+使用 $getjobs。
 说说你能做什么。
 ```
 
@@ -62,7 +62,7 @@ git clone https://github.com/your-repo/getjobs-skill.git \
 JD 抓取使用 prompts/job_search.md。
 匹配分析使用 prompts/matcher.md 和 rubrics/match_score.md。
 投递追踪使用 prompts/tracker.md。
-简历联动调用 resume-jd-optimizer-cn。
+求职信生成使用 prompts/cover_letter.md。
 ```
 
 ## 首次配置
@@ -70,7 +70,7 @@ JD 抓取使用 prompts/job_search.md。
 ### 1. 创建数据目录
 
 ```bash
-mkdir -p ~/.getjobs/{cache/jds,output/{resumes,cover_letters,reports}}
+mkdir -p ~/.getjobs/{cache/jds,output/{cover_letters,reports}}
 ```
 
 ### 2. 配置文件（可选）
@@ -140,29 +140,10 @@ JD：[粘贴 JD 内容]
 匹配分：85
 ```
 
-### 场景 4：生成定制简历
+### 场景 4：生成求职信
 
 ```markdown
-为这个 JD 生成定制简历，然后写一封求职信。
-JD：[粘贴 JD]
-```
-
-## 与 resume-jd-optimizer-cn 联动
-
-### 前提条件
-
-确保 `resume-jd-optimizer-cn` 已安装在 Codex：
-
-```bash
-git clone https://github.com/coinluu/resume-jd-optimizer-cn.git \
-  ~/.codex/skills/resume-jd-optimizer-cn
-```
-
-### 联动触发
-
-```markdown
-我想投递这个岗位，请调用简历优化 Skill 生成定制简历。
-JD：[粘贴 JD]
+为这个 JD 生成一封求职信。
 ```
 
 ## 安装成功标准
@@ -171,7 +152,7 @@ JD：[粘贴 JD]
 - [ ] 能搜索并抓取 JD（或提示用户提供）
 - [ ] 能分析简历与 JD 的匹配度
 - [ ] 能创建和更新投递记录
-- [ ] 能调用 resume-jd-optimizer-cn 生成定制简历
+- [ ] 能生成定制求职信
 
 ## 常见问题
 
@@ -201,7 +182,7 @@ rm -rf ~/.getjobs
 ## 更新 Skill
 
 ```bash
-cd ~/.codex/skills/getjobs-skill
+cd ~/.codex/skills/getjobs
 git pull
 ```
 
