@@ -56,8 +56,8 @@
 ### 安装
 
 ```bash
-git clone https://github.com/your-repo/getjobs-skill.git \
-  ~/.codex/skills/getjobs-skill
+git clone https://github.com/Cap-bit-mint/GetJobs.git \
+  ~/.codex/skills/getjobs
 ```
 
 ### 基本使用
