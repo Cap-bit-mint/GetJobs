@@ -1,0 +1,14 @@
+{
+  "company": "字节跳动",
+  "position": "高级产品经理",
+  "salary": "35-60k",
+  "location": "北京",
+  "requirements": {
+    "experience": "5年+",
+    "education": "本科+",
+    "skills": ["SQL", "PRD", "数据分析"],
+    "experience_type": "B端",
+    "soft_skills": ["跨团队推进", "项目管理"]
+  },
+  "raw_text": "岗位职责：\n1. 负责电商订单系统产品设计\n2. 独立输出PRD文档\n3. 跨团队协调资源推进项目\n\n任职要求：\n1. 5年以上产品经验，本科及以上学历\n2. 有B端产品经验优先\n3. 熟练使用SQL进行数据分析\n4. 能独立输出PRD文档"
+}

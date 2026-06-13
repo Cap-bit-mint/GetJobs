@@ -1,0 +1,22 @@
+{
+  "name": "张三",
+  "experience_years": 3,
+  "education": "本科",
+  "skills": ["PRD输出", "SQL取数", "Axure"],
+  "experience": [
+    {
+      "company": "A公司",
+      "position": "产品经理",
+      "duration": "3年",
+      "type": "B端",
+      "description": "负责订单系统，PRD输出，偶尔用SQL取数，参与跨团队项目"
+    }
+  ],
+  "projects": [
+    {
+      "name": "订单系统重构",
+      "role": "负责人",
+      "outcome": "提升处理效率30%"
+    }
+  ]
+}
