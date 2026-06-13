@@ -1,6 +1,6 @@
 # GetJobs Skill
 
-> Full-Stack Job Search Assistant - JD Crawling, Resume Matching, Application Tracking, Cover Letter Generation
+> Full-Stack Job Search Assistant - JD Crawling, Resume Matching, Resume Optimization, Application Tracking, Cover Letter Generation
 
 A comprehensive AI Skill for managing your entire job search process in one place.
 
@@ -14,21 +14,29 @@ A comprehensive AI Skill for managing your entire job search process in one plac
 - Support for major job platforms worldwide
 - API-first, fallback to browser automation
 
-### 2. Match Analysis
+### 2. Resume Matching
 - JD requirement parsing
 - Resume match scoring
 - Multi-JD comparison
 - Competitiveness analysis
 
-### 3. Application Tracking
+### 3. Resume Optimization (Built-in)
+- JD parsing and evidence mapping
+- Gap diagnosis and experience probing
+- Tailored resume rewriting (based on real experiences)
+- ATS plain-text version generation
+- Interview question generation
+- 5-dimension scoring: JD Match / ATS / HR Appeal / Interview Readiness / Credibility
+
+### 4. Application Tracking
 - Track all applications
 - Status updates
 - Follow-up reminders
 - Weekly/Monthly reports
 
-### 4. Cover Letter Generation
+### 5. Cover Letter Generation
 - Generate tailored cover letters based on resume
-- Support multiple formats (standard/brief/Boss直聘)
+- Support multiple formats (standard/brief/BOSS)
 - Auto-link to tracking records
 
 ---
@@ -47,6 +55,9 @@ Search for Tencent's Product Manager positions.
 
 # Analyze match
 Analyze my resume against this JD.
+
+# Optimize resume
+Optimize my resume for this JD.
 
 # Track applications
 Add an application: ByteDance, Senior PM, 85 match score.
@@ -73,7 +84,9 @@ All data stored locally for privacy:
 ├── applications.json    # Application records
 ├── config.json         # Configuration
 ├── cache/jds/          # JD cache
-└── output/            # Generated cover letters
+└── output/
+    ├── resumes/      # Generated resumes
+    └── cover_letters/ # Generated cover letters
 ```
 
 ---

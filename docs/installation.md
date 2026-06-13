@@ -1,14 +1,14 @@
 # 安装与接入指南
 
-`getjobs-skill` 是一个用于求职全流程管理的 AI Skill，支持 JD 抓取、简历匹配、投递追踪和求职信生成。
+`getjobs-skill` 是一个用于求职全流程管理的 AI Skill，支持 JD 抓取、简历匹配、简历优化、投递追踪和求职信生成。
 
 ## 先理解文件作用
 
 | 路径 | 作用 | 什么时候加载 |
 |---|---|---|
 | `SKILL.md` | 最高优先级规则、输入路由、输出要求 | 始终加载 |
-| `prompts/` | JD 搜索、匹配、追踪等阶段 Prompt | 执行对应阶段时加载 |
-| `templates/` | 追踪记录、求职信等输出模板 | 生成输出时加载 |
+| `prompts/` | JD 搜索、匹配、优化、追踪等阶段 Prompt | 执行对应阶段时加载 |
+| `templates/` | 追踪记录、简历、求职信等输出模板 | 生成输出时加载 |
 | `rubrics/` | 匹配度评分规则 | 评分时加载 |
 | `docs/` | 平台指南、存储格式、隐私政策 | 需要时加载 |
 | `tools/` | 浏览器自动化、API 配置说明 | JD 抓取时参考 |
@@ -60,9 +60,10 @@ git clone https://github.com/Cap-bit-mint/GetJobs.git \
 ```
 始终加载 SKILL.md 作为最高优先级工作流。
 JD 抓取使用 prompts/job_search.md。
-匹配分析使用 prompts/matcher.md 和 rubrics/match_score.md。
+简历优化使用 prompts/resume/ 目录下的文件。
 投递追踪使用 prompts/tracker.md。
 求职信生成使用 prompts/cover_letter.md。
+评分使用 rubrics/ 目录下的文件。
 ```
 
 ## 首次配置
@@ -70,7 +71,7 @@ JD 抓取使用 prompts/job_search.md。
 ### 1. 创建数据目录
 
 ```bash
-mkdir -p ~/.getjobs/{cache/jds,output/{cover_letters,reports}}
+mkdir -p ~/.getjobs/{cache/jds,output/{resumes,cover_letters,reports}}
 ```
 
 ### 2. 配置文件（可选）
@@ -131,7 +132,18 @@ JD：[粘贴 JD 内容]
 简历：[粘贴简历]
 ```
 
-### 场景 3：管理投递记录
+### 场景 3：优化简历
+
+```markdown
+为这个 JD 优化我的简历。
+
+JD：[粘贴 JD 内容]
+简历：[粘贴简历]
+
+请先分析差距，追问关键信息后再生成最终简历。
+```
+
+### 场景 4：管理投递记录
 
 ```markdown
 添加一条投递记录：
@@ -140,7 +152,7 @@ JD：[粘贴 JD 内容]
 匹配分：85
 ```
 
-### 场景 4：生成求职信
+### 场景 5：生成求职信
 
 ```markdown
 为这个 JD 生成一封求职信。
@@ -151,6 +163,7 @@ JD：[粘贴 JD 内容]
 - [ ] Skill 能说明自己的三条核心规则
 - [ ] 能搜索并抓取 JD（或提示用户提供）
 - [ ] 能分析简历与 JD 的匹配度
+- [ ] 能基于真实经历优化定制简历
 - [ ] 能创建和更新投递记录
 - [ ] 能生成定制求职信
 
@@ -162,6 +175,10 @@ A：GetJobs 支持多种数据来源，按优先级：
 1. 官网招聘页
 2. 用户直接提供 JD
 3. Browser 插件自动化
+
+### Q：简历优化需要提供什么？
+
+A：最好同时提供 JD 和简历。如果没有 JD，只能做基础简历诊断；如果没有简历，只能解析 JD。
 
 ### Q：如何导出投递记录？
 

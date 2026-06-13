@@ -1,6 +1,6 @@
 # GetJobs Skill
 
-> 求职全流程助手 - JD 抓取、简历匹配、投递追踪、求职信生成
+> 求职全流程助手 - JD 抓取、简历匹配、简历优化、投递追踪、求职信生成
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Skill](https://img.shields.io/badge/AI%20Skill-GetJobs-6f42c1)](SKILL.md)
@@ -15,6 +15,7 @@
 |------|-----------------|
 | JD 信息分散在多个平台 | 一站式搜索和抓取 |
 | 不知道 JD 与简历的匹配度 | 量化匹配分析 |
+| 简历与 JD 不匹配 | 基于真实经历优化定制简历 |
 | 投递后忘记跟进 | 投递状态追踪 |
 | 每个 JD 都要写求职信 | 基于简历生成定制求职信 |
 
@@ -29,24 +30,33 @@
 - 支持国内外主流招聘平台
 - API 优先，降级到浏览器自动化
 
-### 2. 匹配分析
+### 2. 简历匹配
 
 - JD 要求解析
 - 简历匹配度计算
 - 多 JD 横向对比
 - 竞争力分析
 
-### 3. 投递追踪
+### 3. 简历优化（内置）
+
+- JD 解析与证据映射
+- 缺口诊断与素材追问
+- 定制简历重写（保留真实经历）
+- ATS 纯文本版生成
+- 面试追问生成
+- 五维评分：JD 匹配 / ATS / HR 吸引力 / 面试准备 / 可信度
+
+### 4. 投递追踪
 
 - 投递记录管理
 - 状态自动更新
 - 跟进提醒
 - 周报/月报统计
 
-### 4. 求职信生成
+### 5. 求职信生成
 
 - 基于简历生成定制求职信
-- 支持多种格式（标准/精简/Boss直聘）
+- 支持多种格式（标准/精简/BOSS直聘）
 - 自动关联投递记录
 
 ---
@@ -70,6 +80,13 @@ git clone https://github.com/Cap-bit-mint/GetJobs.git \
 **分析匹配度：**
 ```
 分析我的简历与这个 JD 的匹配度。
+JD：[粘贴 JD]
+简历：[粘贴简历]
+```
+
+**优化简历：**
+```
+为这个 JD 优化我的简历。
 JD：[粘贴 JD]
 简历：[粘贴简历]
 ```
@@ -98,12 +115,35 @@ getjobs-skill/
 │   ├── job_search.md           # JD 搜索与抓取
 │   ├── matcher.md              # JD-简历匹配
 │   ├── tracker.md             # 投递追踪
-│   └── cover_letter.md        # 求职信生成
+│   ├── cover_letter.md        # 求职信生成
+│   └── resume/                 # 简历优化模块
+│       ├── resume_optimizer.md    # 核心工作流
+│       ├── jd_parser.md          # JD 解析
+│       ├── resume_parser.md        # 简历解析
+│       ├── gap_analyzer.md        # 缺口分析
+│       ├── experience_interviewer.md # 素材追问
+│       ├── resume_rewriter.md      # 简历重写
+│       ├── ats_checker.md         # ATS 检查
+│       ├── hr_reviewer.md         # HR 视角检查
+│       ├── interview_question_generator.md # 面试追问
+│       ├── risk_checker.md       # 风险检查
+│       ├── final_report_generator.md # 最终报告
+│       └── truthfulness_policy.md  # 真实性政策
 ├── rubrics/
-│   └── match_score.md         # 匹配度评分规则
+│   ├── match_score.md         # JD-简历匹配分
+│   └── resume/                # 简历评分
+│       ├── jd_match_score.md
+│       ├── ats_score.md
+│       ├── hr_score.md
+│       ├── interview_readiness_score.md
+│       └── credibility_score.md
 ├── templates/
 │   ├── job_tracking_template.md
-│   └── cover_letter_template.md
+│   ├── cover_letter_template.md
+│   └── resume/                # 简历模板
+│       ├── jd_match_report_template.md
+│       ├── optimized_resume_template.md
+│       └── ats_plain_text_template.md
 ├── docs/
 │   ├── installation.md         # 安装指南
 │   ├── platform_guide.md        # 平台使用指南
@@ -113,7 +153,9 @@ getjobs-skill/
 │   ├── browser_automation.md   # 浏览器自动化
 │   └── api_services.md         # API 配置
 └── examples/
-    └── sample_tracking.md     # 追踪示例
+    ├── sample_tracking.md     # 追踪示例
+    └── resume/                 # 简历优化示例
+        └── sample_optimization.md
 ```
 
 ---
@@ -122,18 +164,10 @@ getjobs-skill/
 
 ### 国内平台
 - 官网招聘页（最高优先级）
-- Boss 直聘
-- 拉勾
-- 猎聘
-- 智联招聘
-- 前程无忧
+- Boss 直聘、拉勾、猎聘、智联招聘、前程无忧
 
 ### 海外平台
-- LinkedIn
-- Indeed
-- Glassdoor
-- RemoteOK
-- Wellfound (AngelList)
+- LinkedIn、Indeed、Glassdoor、RemoteOK、Wellfound
 
 ---
 
@@ -144,9 +178,11 @@ getjobs-skill/
 ```
 ~/.getjobs/
 ├── applications.json      # 投递记录
-├── config.json           # 配置文件
+├── config.json         # 配置文件
 ├── cache/jds/          # JD 缓存
-└── output/              # 生成的求职信
+└── output/
+    ├── resumes/       # 生成的简历
+    └── cover_letters/  # 生成的求职信
 ```
 
 详见 [隐私政策](docs/privacy.md)。
